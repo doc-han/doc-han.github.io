@@ -1,7 +1,9 @@
 import React from "react";
 import Helmet from "react-helmet";
 import config from "../../data/SiteConfig";
-import "./index.css";
+import SiteHeader from "../components/Header"
+import About from "../components/About"
+import "../styles/styles.css";
 
 export default class MainLayout extends React.Component {
   render() {
@@ -11,7 +13,12 @@ export default class MainLayout extends React.Component {
         <Helmet>
           <meta name="description" content={config.siteDescription} />
         </Helmet>
-        {children}
+        <SiteHeader />
+        <div id="body">
+          <div className="container">
+            { children }
+          </div>
+        </div>
       </div>
     );
   }
