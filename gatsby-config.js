@@ -13,7 +13,7 @@ module.exports = {
       image_url: `${urljoin(
         config.siteUrl,
         config.pathPrefix
-      )}/logos/logo-512.png`,
+      )}/logos/logo-48.png`,
       copyright: config.copyright
     }
   },
@@ -62,7 +62,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-nprogress",
       options: {
-        color: config.themeColor
+        color: "#ff9800"
       }
     },
     "gatsby-plugin-sharp",
@@ -82,13 +82,8 @@ module.exports = {
         display: "minimal-ui",
         icons: [
           {
-            src: "/logos/logo-192x192.png",
-            sizes: "192x192",
-            type: "image/png"
-          },
-          {
-            src: "/logos/logo-512x512.png",
-            sizes: "512x512",
+            src: "/logos/logo-48.png",
+            sizes: "48x60",
             type: "image/png"
           }
         ]

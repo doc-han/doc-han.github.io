@@ -37,6 +37,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         });
       }
     }
+    createNodeField({ node, name: "popular", value: false });
     createNodeField({ node, name: "slug", value: slug });
   }
 };
@@ -45,7 +46,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const postPage = path.resolve("src/templates/post.jsx");
   const tagPage = path.resolve("src/templates/tag.jsx");
-  const categoryPage = path.resolve("src/templates/category.jsx");
 
   const markdownQueryResult = await graphql(
     `
@@ -59,7 +59,6 @@ exports.createPages = async ({ graphql, actions }) => {
               frontmatter {
                 title
                 tags
-                category
                 date
               }
             }
@@ -75,7 +74,6 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const tagSet = new Set();
-  const categorySet = new Set();
 
   const postsEdges = markdownQueryResult.data.allMarkdownRemark.edges;
 
@@ -103,10 +101,6 @@ exports.createPages = async ({ graphql, actions }) => {
       });
     }
 
-    if (edge.node.frontmatter.category) {
-      categorySet.add(edge.node.frontmatter.category);
-    }
-
     const nextID = index + 1 < postsEdges.length ? index + 1 : 0;
     const prevID = index - 1 >= 0 ? index - 1 : postsEdges.length - 1;
     const nextEdge = postsEdges[nextID];
@@ -131,15 +125,6 @@ exports.createPages = async ({ graphql, actions }) => {
       component: tagPage,
       context: {
         tag
-      }
-    });
-  });
-  categorySet.forEach(category => {
-    createPage({
-      path: `/categories/${kebabCase(category)}/`,
-      component: categoryPage,
-      context: {
-        category
       }
     });
   });
