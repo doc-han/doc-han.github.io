@@ -1,15 +1,10 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
+import { kebabCase } from 'lodash'
 import Layout from "../layout";
-import UserInfo from "../components/UserInfo/UserInfo";
-import Disqus from "../components/Disqus/Disqus";
-import PostTags from "../components/PostTags/PostTags";
-import SocialLinks from "../components/SocialLinks/SocialLinks";
-import SEO from "../components/SEO/SEO";
+import SEO from "../components/SEO";
 import config from "../../data/SiteConfig";
-import "./b16-tomorrow-dark.css";
-import "./post.css";
 
 export default class PostTemplate extends React.Component {
   render() {
@@ -17,28 +12,40 @@ export default class PostTemplate extends React.Component {
     const { slug } = pageContext;
     const postNode = data.markdownRemark;
     const post = postNode.frontmatter;
+    const style = {
+      display: 'inline-block'
+    }
     if (!post.id) {
       post.id = slug;
     }
     if (!post.category_id) {
       post.category_id = config.postDefaultCategoryID;
     }
+    const postTags = post.tags.map((tag)=>{
+      return <Link className="tag" to={`/tags/${kebabCase(tag)}`} key={tag}>{tag}</Link>
+    })
+    const share = {
+      whatsapp: `https://wa.me/?text=${config.siteUrl}${slug}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${config.siteUrl}${slug}`,
+      twitter: `https://twitter.com/intent/tweet?text=${config.siteUrl}${slug}`
+    }
     return (
       <Layout>
         <div>
           <Helmet>
-            <title>{`${post.title} | ${config.siteTitle}`}</title>
+            <title>{`${post.title} - ${config.siteTitle}`}</title>
           </Helmet>
           <SEO postPath={slug} postNode={postNode} postSEO />
-          <div>
-            <h1>{post.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
-            <div className="post-meta">
-              <PostTags tags={post.tags} />
-              <SocialLinks postPath={slug} postNode={postNode} />
+          <div className="poster">
+            <div class="small">title: <b><i>{post.title}</i></b></div>
+            <div class="small">tags: <i className="tags" style={style}>{postTags}</i></div>
+            <div class="small">date: <i>{post.date}</i></div>
+            <div class="small">share: <i> <a href={share.twitter} target="_blank">Twitter</a>, <a href={share.facebook} target="_blank">FaceBook</a>, <a href={share.whatsapp} target="_blank">WhatsApp</a> </i></div>
+            <br/><br/>
+            <div className="cover_img">
+              <img src={post.cover} alt=""/>
             </div>
-            <UserInfo config={config} />
-            <Disqus postNode={postNode} />
+            <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
           </div>
         </div>
       </Layout>
@@ -57,7 +64,6 @@ export const pageQuery = graphql`
         title
         cover
         date
-        category
         tags
       }
       fields {
