@@ -17,8 +17,7 @@ class Index extends React.Component {
           <Helmet title={config.siteTitle} />
           <SEO />
           <About />
-          <h2>Popular</h2>
-          <PostListing postEdges={popEdges} />
+          { popEdges.length> 0 ? (<div><h2>Popular</h2><PostListing postEdges={popEdges} /></div>): ""}
           <h2>New</h2>
           <PostListing postEdges={newEdges} />
         </div>
