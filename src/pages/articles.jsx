@@ -48,7 +48,6 @@ export default class Articles extends React.Component {
         return true;
       })
       this.setState({filteredPosts: filtered})
-      console.log(Array.from(this.state.activeTags))
     }
     render(){
         let {filteredPosts} = this.state;
@@ -85,7 +84,6 @@ export const query = graphql`
                 frontmatter {
                   title
                   tags
-                  cover
                   date
                 }
               }

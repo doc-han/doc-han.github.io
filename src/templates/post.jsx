@@ -2,9 +2,11 @@ import React from "react";
 import Helmet from "react-helmet";
 import { graphql, Link } from "gatsby";
 import { kebabCase } from 'lodash'
+import Img from 'gatsby-image'
 import Layout from "../layout";
 import SEO from "../components/SEO";
 import config from "../../data/SiteConfig";
+import { dateFromFormat } from '../utils/utils'
 
 export default class PostTemplate extends React.Component {
   render() {
@@ -18,9 +20,7 @@ export default class PostTemplate extends React.Component {
     if (!post.id) {
       post.id = slug;
     }
-    if (!post.category_id) {
-      post.category_id = config.postDefaultCategoryID;
-    }
+
     const postTags = post.tags.map((tag)=>{
       return <Link className="tag" to={`/tags/${kebabCase(tag)}`} key={tag}>{tag}</Link>
     })
@@ -39,11 +39,11 @@ export default class PostTemplate extends React.Component {
           <div className="poster">
             <div class="small">title: <b><i>{post.title}</i></b></div>
             <div class="small">tags: <i className="tags" style={style}>{postTags}</i></div>
-            <div class="small">date: <i>{post.date}</i></div>
+            <div class="small">date: <i>{dateFromFormat(post.date)}</i></div>
             <div class="small">share: <i> <a href={share.twitter} target="_blank">Twitter</a>, <a href={share.facebook} target="_blank">FaceBook</a>, <a href={share.whatsapp} target="_blank">WhatsApp</a> </i></div>
             <br/><br/>
             <div className="cover_img">
-              <img src={post.cover} alt=""/>
+              <Img fixed={post.cover.childImageSharp.fixed} alt=""/>
             </div>
             <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
           </div>
@@ -62,7 +62,13 @@ export const pageQuery = graphql`
       excerpt
       frontmatter {
         title
-        cover
+        cover {
+          childImageSharp {
+            fixed(width: 150, height: 150) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
         date
         tags
       }

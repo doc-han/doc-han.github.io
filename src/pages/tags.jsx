@@ -6,7 +6,6 @@ import Layout from '../layout'
 class Tags extends React.Component {
     render(){
         const tags = this.props.data.tags.group;
-        console.log(tags)
         const tagList = tags.map(tag=>{
             return <li><Link to={`/tags/${kebabCase(tag.fieldValue)}`}>{tag.fieldValue}</Link></li>
         })
