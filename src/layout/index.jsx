@@ -11,6 +11,7 @@ export default class MainLayout extends React.Component {
     return (
       <div>
         <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="description" content={config.siteDescription} />
         </Helmet>
         <SiteHeader />
