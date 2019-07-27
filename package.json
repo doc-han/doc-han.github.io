@@ -27,6 +27,7 @@
     "gatsby-transformer-sharp": "^2.1.19",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "prism-themes": "^1.1.0",
     "prismjs": "^1.16.0",
     "react": "^16.8.6",
     "react-disqus-comments": "^1.4.0",
@@ -69,7 +70,8 @@
     "lint:js": "eslint --ext .js,.jsx .",
     "lint:md": "remark content/posts/",
     "write-good": "write-good $(glob 'content/posts/**/*.md')",
-    "format:js": "prettier '**/*.{js,jsx}' --write"
+    "format:js": "prettier '**/*.{js,jsx}' --write",
+    "deploy": "gatsby build && gh-pages -d public -b gh-pages"
   },
   "remarkConfig": {
     "plugins": [

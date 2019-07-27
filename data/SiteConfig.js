@@ -12,7 +12,7 @@ const config = {
   disqusShortname: 'han', // Disqus shortname.
   postDefaultCategoryID: 'Tech', // Default category for posts.
   dateFromFormat: 'YYYY-MM-DD', // Date format used in the frontmatter.
-  dateFormat: 'DD/MM/YYYY', // Date format for display.
+  dateFormat: 'MMMM Do, YYYY', // Date format for display.
   userName: 'Han', // Username to display in the author segment.
   userEmail: 'yahyafarhan48@gmail.com', // Email used for RSS feed's author segment
   userTwitter: '', // Optionally renders 'Follow Me' in the UserInfo segment.
