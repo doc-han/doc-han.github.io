@@ -1,8 +1,8 @@
 const config = {
-  siteTitle: 'Hanpages', // Site title.
+  siteTitle: 'HanPages', // Site title.
   siteTitleShort: 'Hanpages', // Short site title for homescreen (PWA). Preferably should be under 12 characters to prevent truncation.
   siteTitleAlt: 'Hanpages', // Alternative site title for SEO.
-  siteLogo: '/logos/logo-1024.png', // Logo used for SEO and manifest.
+  siteLogo: '/logos/logo-48.png', // Logo used for SEO and manifest.
   siteUrl: 'https://www.hanpages.com', // Domain of your website without pathPrefix.
   pathPrefix: '', // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
   siteDescription: 'Han is a University Computer Science student who likes to put down his understanding of concepts and others', // Website description used for RSS feeds/meta description tag.
@@ -19,23 +19,21 @@ const config = {
   userLocation: 'Accra, Ghana', // User location to display in the author segment.
   userAvatar: '', // User avatar to display in the author segment.
   userDescription:
-    'I\'m an open sourcerer and an aspiring AI specialist', // User description to display in the author segment.
+    `I\'m a second-year computer scientist and a Software Developer specializing in JavaScript and C++,
+    Currently doing some data science.`, // User description to display in the author segment.
   // Links to social profiles/projects you want to display in the author segment/navigation bar.
-  userLinks: [
+  headLinks: [
     {
-      label: 'GitHub',
-      url: 'https://github.com/doc-han',
-      iconClassName: 'fa fa-github'
+      label: 'Articles',
+      url: '/articles',
     },
     {
-      label: 'Twitter',
-      url: 'https://twitter.com/',
-      iconClassName: 'fa fa-twitter'
+      label: 'About',
+      url: '/about',
     },
     {
-      label: 'Email',
-      url: 'mailto:yahyafarhan48@gmail.com',
-      iconClassName: 'fa fa-envelope'
+      label: 'Buy me a coffee',
+      url: 'https://ko-fi.com/han123',
     }
   ],
   copyright: 'Copyright © 2019. Han', // Copyright string for the footer of the website and RSS feed.
